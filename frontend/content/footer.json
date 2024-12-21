@@ -1,0 +1,36 @@
+{
+    "languages": [
+      { "value": "en", "label": "English" },
+      { "value": "es", "label": "Spanish" },
+      { "value": "fr", "label": "French" }
+    ],
+    "sections": [
+      {
+        "title": "Documentation",
+        "links": [
+          { "label": "About Wiki YoY Dashboard", "url": "#" },
+          { "label": "Technology", "url": "#" },
+          { "label": "Data & Uses", "url": "#" },
+          { "label": "Privacy Policy", "url": "#" }
+        ]
+      },
+      {
+        "title": "Contributing",
+        "links": [
+          { "label": "GitHub", "url": "#" },
+          { "label": "Contributing Guide", "url": "#" },
+          { "label": "Report a Bug", "url": "#" },
+          { "label": "New Feature", "url": "#" }
+        ]
+      },
+      {
+        "title": "Community",
+        "links": [
+          { "label": "Phabricator", "url": "#" },
+          { "label": "GitHub", "url": "#" },
+          { "label": "IRC", "url": "#" }
+        ]
+      }
+    ]
+  }
+  

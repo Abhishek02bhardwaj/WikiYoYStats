@@ -1,0 +1,26 @@
+{
+    "wikiLanguages": [
+      { "value": "en", "label": "English" },
+      { "value": "es", "label": "Spanish" },
+      { "value": "fr", "label": "French" },
+      { "value": "de", "label": "German" },
+      { "value": "zh", "label": "Chinese" }
+    ],
+    "projectTypes": [
+      { "value": "wikipedia", "label": "Wikipedia" },
+      { "value": "wiktionary", "label": "Wiktionary" },
+      { "value": "wikibooks", "label": "Wikibooks" },
+      { "value": "wikiquote", "label": "Wikiquote" },
+      { "value": "wikinews", "label": "Wikinews" },
+      { "value": "wikisource", "label": "Wikisource" },
+      { "value": "wikiversity", "label": "Wikiversity" },
+      { "value": "wikivoyage", "label": "Wikivoyage" }
+    ],
+    "comparisonMetrics": [
+      { "value": "pageviews", "label": "Content Edits" },
+      { "value": "edits", "label": "Number of Editors" },
+      { "value": "contributors", "label": "Number of Admins" },
+      { "value": "articles", "label": "Number of Pages" }
+    ]
+  }
+  
