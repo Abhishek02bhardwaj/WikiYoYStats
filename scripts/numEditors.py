@@ -68,6 +68,7 @@ def editors_percent_change(project, start_date, end_date, editor_type="all-edito
     
     if start_avg is not None and end_avg is not None:
         percentage_change = ((end_avg - start_avg) / start_avg) * 100
-        return percentage_change
+        return {"percentage": percentage_change, "start_avg": start_avg, "end_avg": end_avg}
+
     else:
-        return None
+        return {"percentage": None, "start_avg": start_avg, "end_avg": end_avg}

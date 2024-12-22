@@ -93,11 +93,12 @@ def pages_percent_change(project, start_date, end_date):
 
     years = sorted(yearly_data.keys())
     year1, year2 = years[0], years[1]
-    value1, value2 = yearly_data[year1], yearly_data[year2]
+    value1, value2 = int(yearly_data[year1]), int(yearly_data[year2])
 
     if value1 != 0:
         percentage_change = ((value2 - value1) / value1) * 100
-        return percentage_change
+        return {"percentage": percentage_change, "yearly_total_1": value1, "yearly_total_2": value2}
+
     else:
         print(f"Year {year1} has zero new pages, cannot calculate percentage change.")
-        return None
+        return {"percentage": None, "yearly_total_1": value1, "yearly_total_2": value2}

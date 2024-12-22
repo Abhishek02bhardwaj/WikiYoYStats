@@ -63,6 +63,7 @@ export default function MainContent() {
 
       const data = await response.json();
       setResultData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -161,23 +162,59 @@ export default function MainContent() {
         <div className="mt-8 text-gray-700">
           <h2 className="text-lg font-bold mb-4">Results</h2>
           <table className="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-              <tr>
-                <th className="border border-gray-300 px-4 py-2">Metric</th>
-                <th className="border border-gray-300 px-4 py-2">Language</th>
-                <th className="border border-gray-300 px-4 py-2">Project Type</th>
-                <th className="border border-gray-300 px-4 py-2">Value</th>
-              </tr>
-            </thead>
+          <thead>
+          <tr>
+            <th className="border border-gray-300 px-4 py-2">Metric</th>
+            <th className="border border-gray-300 px-4 py-2">Language</th>
+            <th className="border border-gray-300 px-4 py-2">Project Type</th>
+            <th className="border border-gray-300 px-4 py-2">Value</th>
+            {resultData.some((row) => row.start_avg !== undefined) && (
+              <>
+                <th className="border border-gray-300 px-4 py-2">Edits in {startYear}</th>
+                <th className="border border-gray-300 px-4 py-2">Edits in {endYear}</th>
+              </>
+            )}
+            {resultData.some((row) => row.start_avg_edits !== undefined) && (
+              <>
+                <th className="border border-gray-300 px-4 py-2">Edits in {startYear}</th>
+                <th className="border border-gray-300 px-4 py-2">Edits in {endYear}</th>
+              </>
+            )}
+            {resultData.some((row) => row.yearly_total_1 !== undefined) && (
+              <>
+                <th className="border border-gray-300 px-4 py-2">Pages in {startYear}</th>
+                <th className="border border-gray-300 px-4 py-2">Pages in {endYear}</th>
+              </>
+            )}
+          </tr>
+        </thead>
             <tbody>
-              {resultData.map(({ metric, language, project_type, value }) => (
-                <tr key={`${metric}-${language}-${project_type}`}>
-                  <td className="border border-gray-300 px-4 py-2">{metric}</td>
-                  <td className="border border-gray-300 px-4 py-2">{language}</td>
-                  <td className="border border-gray-300 px-4 py-2">{project_type}</td>
-                  <td className="border border-gray-300 px-4 py-2">{value}</td>
-                </tr>
-              ))}
+            {resultData.map(({ metric, language, project_type, value, start_avg, end_avg, start_avg_edits, end_avg_edits, yearly_total_1, yearly_total_2 }) => (
+              <tr key={`${metric}-${language}-${project_type}`}>
+                <td className="border border-gray-300 px-4 py-2">{metric}</td>
+                <td className="border border-gray-300 px-4 py-2">{langData[language].localname}</td>
+                <td className="border border-gray-300 px-4 py-2">{project_type}</td>
+                <td className="border border-gray-300 px-4 py-2">{value}</td>
+                {start_avg !== undefined && (
+                  <>
+                    <td className="border border-gray-300 px-4 py-2">{start_avg}</td>
+                    <td className="border border-gray-300 px-4 py-2">{end_avg}</td>
+                  </>
+                )}
+                {start_avg_edits !== undefined && (
+                  <>
+                    <td className="border border-gray-300 px-4 py-2">{start_avg_edits}</td>
+                    <td className="border border-gray-300 px-4 py-2">{end_avg_edits}</td>
+                  </>
+                )}
+                {yearly_total_1 !== undefined && (
+                  <>
+                    <td className="border border-gray-300 px-4 py-2">{yearly_total_1}</td>
+                    <td className="border border-gray-300 px-4 py-2">{yearly_total_2}</td>
+                  </>
+                )}
+              </tr>
+            ))}
             </tbody>
           </table>
         </div>

@@ -1,16 +1,11 @@
 {
-  "languages": [
-    { "value": "en", "label": "English" },
-    { "value": "es", "label": "Spanish" },
-    { "value": "fr", "label": "French" }
-  ],
   "sections": [
     {
       "title": "Documentation",
       "links": [
         { "label": "About Wiki YoY Dashboard", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/blob/main/README.md" },
         { "label": "Data it Uses", "url": "https://doc.wikimedia.org/generated-data-platform/aqs/analytics-api/" },
-        { "label": "Privacy Policy", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/blob/main/LICENSE" }
+        { "label": "License", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/blob/main/LICENSE" }
       ]
     },
     {
