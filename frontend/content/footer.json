@@ -1,36 +1,33 @@
 {
-    "languages": [
-      { "value": "en", "label": "English" },
-      { "value": "es", "label": "Spanish" },
-      { "value": "fr", "label": "French" }
-    ],
-    "sections": [
-      {
-        "title": "Documentation",
-        "links": [
-          { "label": "About Wiki YoY Dashboard", "url": "#" },
-          { "label": "Technology", "url": "#" },
-          { "label": "Data & Uses", "url": "#" },
-          { "label": "Privacy Policy", "url": "#" }
-        ]
-      },
-      {
-        "title": "Contributing",
-        "links": [
-          { "label": "GitHub", "url": "#" },
-          { "label": "Contributing Guide", "url": "#" },
-          { "label": "Report a Bug", "url": "#" },
-          { "label": "New Feature", "url": "#" }
-        ]
-      },
-      {
-        "title": "Community",
-        "links": [
-          { "label": "Phabricator", "url": "#" },
-          { "label": "GitHub", "url": "#" },
-          { "label": "IRC", "url": "#" }
-        ]
-      }
-    ]
-  }
-  
+  "languages": [
+    { "value": "en", "label": "English" },
+    { "value": "es", "label": "Spanish" },
+    { "value": "fr", "label": "French" }
+  ],
+  "sections": [
+    {
+      "title": "Documentation",
+      "links": [
+        { "label": "About Wiki YoY Dashboard", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/blob/main/README.md" },
+        { "label": "Data it Uses", "url": "https://doc.wikimedia.org/generated-data-platform/aqs/analytics-api/" },
+        { "label": "Privacy Policy", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/blob/main/LICENSE" }
+      ]
+    },
+    {
+      "title": "Contributing",
+      "links": [
+        { "label": "GitHub", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard" },
+        { "label": "Contributing Guide", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/blob/main/README.md" },
+        { "label": "Report a Bug", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/issues" },
+        { "label": "New Feature", "url": "https://github.com/indictechcom/wikis-by-growth-dashboard/issues" }
+      ]
+    },
+    {
+      "title": "Community",
+      "links": [
+        { "label": "Phabricator", "url": "https://phabricator.wikimedia.org/project/profile/3748/" },
+        { "label": "GitHub", "url": "https://github.com/indictechcom" }
+      ]
+    }
+  ]
+}
