@@ -6,46 +6,54 @@ import langData from "../content/languages.json";
 import { MultiSelect } from "react-multi-select-component";
 
 export default function MainContent() {
-  const [languages, setLanguages] = useState([{ label: "All", value: "all" }]);
-  const [projectType, setProjectType] = useState("");
+  const [languages, setLanguages] = useState([]);
+  const [projectTypes, setProjectTypes] = useState([]);
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
+  const [comparisonMetric, setComparisonMetric] = useState("");
   const [resultData, setResultData] = useState(null);
 
-  // Options for the multiselect dropdown
   const languageOptions = [
-    { label: "All", value: "all" },
     ...Object.entries(langData).map(([code, lang]) => ({
       label: `${lang.name} (${lang.localname})`,
       value: code,
     })),
   ];
 
+  const comparisonMetricOptions = dropdownData.comparisonMetrics.map((metric) => ({
+    label: metric.label,
+    value: metric.value,
+  }));
+
+  const projectTypeOptions = dropdownData.projectTypes.map((type) => ({
+    label: type.label,
+    value: type.value,
+  }));
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!languages.length || !projectType || !startYear || !endYear) {
+    if (!languages.length || !projectTypes.length || !startYear || !endYear || !comparisonMetric) {
       alert("Please fill in all the fields!");
       return;
     }
 
-    // Handle "All" option
-    const selectedLanguages =
-      languages.some((lang) => lang.value === "all")
-        ? languageOptions.filter((lang) => lang.value !== "all").map((lang) => lang.value)
-        : languages.map((lang) => lang.value);
-
+    const selectedLanguages = languages.map((lang) => lang.value);
+    const selectedProjectTypes = projectTypes.map((type) => type.value);
     const startDate = `${startYear}0101`;
     const endDate = `${endYear}0101`;
+    console.log(selectedLanguages, selectedProjectTypes, startDate, endDate, comparisonMetric);
 
     try {
       const response = await fetch("http://localhost:8000/percentage_change/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          projects: selectedLanguages.map((lang) => `${lang}.${projectType}.org`),
+          projects: selectedLanguages,
+          project_types: selectedProjectTypes,
           start_date: startDate,
           end_date: endDate,
+          comparison_metric: comparisonMetric,
         }),
       });
 
@@ -64,7 +72,6 @@ export default function MainContent() {
     <section className="container mx-auto py-12 px-6">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {/* Multiselect for Languages */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
               Wiki Languages
@@ -78,30 +85,39 @@ export default function MainContent() {
             />
           </div>
 
-          {/* Dropdown for Project Type */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
-              Project Type
+              Project Types
             </label>
-            <select
-              className="border border-gray-300 bg-white rounded-md p-3 w-full text-gray-700 focus:ring-2 focus:ring-blue-500"
-              value={projectType}
-              onChange={(e) => setProjectType(e.target.value)}
-            >
-              <option value="" disabled>
-                Select a project type
-              </option>
-              {dropdownData.projectTypes.map((type) => (
-                <option key={type.value} value={type.value}>
-                  {type.label}
-                </option>
-              ))}
-            </select>
+            <MultiSelect
+              options={projectTypeOptions}
+              value={projectTypes}
+              onChange={setProjectTypes}
+              labelledBy="Select project types"
+              className="text-gray-700"
+            />
           </div>
+
+          <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">
+            Comparison Metric
+          </label>
+          <select
+            className="border border-gray-300 bg-white rounded-md p-3 w-full text-gray-700"
+            value={comparisonMetric}
+            onChange={(e) => setComparisonMetric(e.target.value)}
+          >
+            <option value="">Select a metric</option>
+            {comparisonMetricOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Date Picker for Start Year */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
               Start Year
@@ -117,7 +133,6 @@ export default function MainContent() {
             />
           </div>
 
-          {/* Date Picker for End Year */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
               End Year
@@ -142,7 +157,6 @@ export default function MainContent() {
         </button>
       </form>
 
-      {/* Result Table */}
       {resultData && (
         <div className="mt-8 text-gray-700">
           <h2 className="text-lg font-bold mb-4">Results</h2>
@@ -151,14 +165,16 @@ export default function MainContent() {
               <tr>
                 <th className="border border-gray-300 px-4 py-2">Metric</th>
                 <th className="border border-gray-300 px-4 py-2">Language</th>
+                <th className="border border-gray-300 px-4 py-2">Project Type</th>
                 <th className="border border-gray-300 px-4 py-2">Value</th>
               </tr>
             </thead>
             <tbody>
-              {resultData.map(({ metric, language, value }) => (
-                <tr key={`${metric}-${language}`}>
+              {resultData.map(({ metric, language, project_type, value }) => (
+                <tr key={`${metric}-${language}-${project_type}`}>
                   <td className="border border-gray-300 px-4 py-2">{metric}</td>
                   <td className="border border-gray-300 px-4 py-2">{language}</td>
+                  <td className="border border-gray-300 px-4 py-2">{project_type}</td>
                   <td className="border border-gray-300 px-4 py-2">{value}</td>
                 </tr>
               ))}
@@ -169,3 +185,4 @@ export default function MainContent() {
     </section>
   );
 }
+

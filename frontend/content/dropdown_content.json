@@ -17,9 +17,9 @@
       { "value": "wikivoyage", "label": "Wikivoyage" }
     ],
     "comparisonMetrics": [
-      { "value": "pageviews", "label": "Content Edits" },
-      { "value": "edits", "label": "Number of Editors" },
-      { "value": "contributors", "label": "Number of Admins" },
+      { "value": "edits", "label": "Content Edits" },
+      { "value": "editors", "label": "Number of Editors" },
+      { "value": "admins", "label": "Number of Admins" },
       { "value": "articles", "label": "Number of Pages" }
     ]
   }
