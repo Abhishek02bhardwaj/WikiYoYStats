@@ -15,8 +15,8 @@ def fetch_new_pages_data(project, editor_type, year, page_type, granularity):
     Returns:
         DataFrame: DataFrame containing date and new pages data.
     """
-    start_date = f"{year}0101"
-    end_date = f"{year}1231"
+    start_date = f"{year[0:4]}0101"
+    end_date = f"{year[0:4]}1231"
     
     url = f"https://wikimedia.org/api/rest_v1/metrics/edited-pages/new/{project}/{editor_type}/{page_type}/{granularity}/{start_date}/{end_date}"
     headers = {"User-Agent": "WikiExplorer/0.1 (contact: abhishek02bhardwaj.er@gmail.com)"}
